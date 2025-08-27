@@ -1,15 +1,13 @@
 class Solution {
-public:
-    vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
-        int n=graph.size();
-        vector<vector<int>> mat(n);
+private:
+    vector<int> topologicalSort(vector<vector<int>>& adj) {
+        int n=adj.size();
         vector<int> indegree(n,0);
         for(int i=0;i<n;i++)
         {
-            for(auto it:graph[i])
+            for(auto it:adj[i])
             {
-                mat[it].push_back(i);
-                indegree[i]++;
+                indegree[it]++;
             }
         }
         queue<int> q;
@@ -20,10 +18,10 @@ public:
         }
         while(!q.empty())
         {
-            auto node=q.front();
-            q.pop();
+            int node=q.front();
             topo.push_back(node);
-            for(auto it:mat[node])
+            q.pop();
+            for(auto it:adj[node])
             {
                 indegree[it]--;
                 if(indegree[it]==0) q.push(it);
@@ -31,5 +29,18 @@ public:
         }
         sort(topo.begin(),topo.end());
         return topo;
+    }
+public:
+    vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
+        int n=graph.size();
+        vector<vector<int>> mat(n);
+        for(int i=0;i<n;i++)
+        {
+            for(auto it:graph[i])
+            {
+                mat[it].push_back(i);
+            }
+        }
+        return topologicalSort(mat);
     }
 };
