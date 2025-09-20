@@ -5,8 +5,8 @@ public:
         vector<int> indegree(n,0);vector<int> topo;
         for(int i=0;i<pre.size();i++)
         {
-            indegree[pre[i][1]]++;
-            mat[pre[i][0]].push_back(pre[i][1]);
+            indegree[pre[i][0]]++;
+            mat[pre[i][1]].push_back(pre[i][0]);
         }
         queue<int> q;
         for(int i=0;i<n;i++) if(indegree[i]==0) q.push(i);
@@ -22,7 +22,7 @@ public:
                 if(indegree[it]==0) q.push(it);
             }
         }
-        reverse(topo.begin(),topo.end());
+        // reverse(topo.begin(),topo.end());
         return topo.size()==n?topo:vector<int>();
     }
 };
