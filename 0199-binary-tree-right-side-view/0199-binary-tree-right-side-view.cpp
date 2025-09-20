@@ -19,16 +19,16 @@ public:
         while(!q.empty())
         {
             int n=q.size();
-            vector<int> ans;
+            int ans=0;
             for(int i=0;i<n;i++)
             {
                 TreeNode* temp=q.front();
                 q.pop();
                 if(temp->left!=NULL) q.push(temp->left);
                 if(temp->right!=NULL) q.push(temp->right);
-                ans.push_back(temp->val);
+                ans=temp->val;
             }
-            res.push_back(ans[ans.size()-1]);
+            res.push_back(ans);
         }
         return res;
     }
