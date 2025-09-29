@@ -3,11 +3,8 @@ public:
     long long maxAlternatingSum(vector<int>& nums, vector<vector<int>>& swaps) {
 
         int n = nums.size();
-        
         int m = swaps.size();
-
         vector<vector<int>> adj(n);
-
         for(int i=0;i<m;i++){
             adj[swaps[i][0]].push_back(swaps[i][1]);
             adj[swaps[i][1]].push_back(swaps[i][0]);
